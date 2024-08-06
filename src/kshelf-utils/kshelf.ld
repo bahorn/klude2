@@ -30,6 +30,7 @@ SECTIONS
   .gnu.hash       : { *(.gnu.hash) } :text
   .dynsym         : { *(.dynsym) } :text
   .dynstr         : { *(.dynstr) }  :text
+
   .init           :
   {
     KEEP (*(SORT_NONE(.init)))
@@ -61,7 +62,50 @@ SECTIONS
   {
     *(.data .data.* .gnu.linkonce.d.*)
   } :data
+    .rela.dyn       :
+    {
+      *(.rela.init)
+     *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+      *(.rela.fini)
+      *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+      *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+      *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+      *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+      *(.rela.ctors)
+      *(.rela.dtors)
+      *(.rela.got)
+      *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+      *(.rela.ldata .rela.ldata.* .rela.gnu.linkonce.l.*)
+      *(.rela.lbss .rela.lbss.* .rela.gnu.linkonce.lb.*)
+      *(.rela.lrodata .rela.lrodata.* .rela.gnu.linkonce.lr.*)
+      *(.rela.ifunc)
+    } :data
+  .rela.plt       :
+    {
+      *(.rela.plt)
+      *(.rela.iplt)
+    } : data
   .got : { *(.got.plt) *(.igot.plt) *(.got) *(.igot) } :data
+    .preinit_array    :
+  {
+    PROVIDE_HIDDEN (__preinit_array_start = .);
+    KEEP (*(.preinit_array))
+    PROVIDE_HIDDEN (__preinit_array_end = .);
+ } :data
+    .init_array    :
+  {
+    PROVIDE_HIDDEN (__init_array_start = .);
+    KEEP (*(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*)))
+    KEEP (*(.init_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .ctors))
+    PROVIDE_HIDDEN (__init_array_end = .);
+  } :data
+  .fini_array    :
+  {
+    PROVIDE_HIDDEN (__fini_array_start = .);
+    KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*)))
+    KEEP (*(.fini_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .dtors))
+    PROVIDE_HIDDEN (__fini_array_end = .);
+  } :data
   _edata = .; PROVIDE (edata = .); 
   . = .;
   __bss_start = .;
@@ -98,5 +142,5 @@ SECTIONS
   _end = .; PROVIDE (end = .);
   . = DATA_SEGMENT_END (.);
   .dynamic : { *(.dynamic) } :dynamic
-  /DISCARD/ : { *(.note.*) *(.gnu_debuglink) *(.gnu.lto_*) *(.init_array) *(.fini_array) *(.comment) *(.interp) }
+  /DISCARD/ : { *(.note.*) *(.gnu_debuglink) *(.gnu.lto_*)  *(.comment) *(.interp) }
 }
