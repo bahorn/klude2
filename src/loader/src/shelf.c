@@ -109,22 +109,27 @@ dt_end:
     relasz /= sizeof(Elf64_Rela);
     /* Now we iterate through the RELA */
     for (int i = 0; i < relasz; i++) {
-        /* symtab idx */
-        int sym_idx = ELF64_R_SYM(rela[i].r_info);
-        char *symname = strtab + symtab[sym_idx].st_name;
-
-#ifdef __KERNEL__
-        unsigned long sym_addr = resolve_sym(symname);
-#else
-        unsigned long sym_addr = 0;
-#endif
-
+        unsigned long *to_patch;
         switch (ELF64_R_TYPE(rela[i].r_info)) {
             case R_X86_64_GLOB_DAT:
+                /* symtab idx */
+                int sym_idx = ELF64_R_SYM(rela[i].r_info);
+                char *symname = strtab + symtab[sym_idx].st_name;
+#ifdef __KERNEL__
+                unsigned long sym_addr = resolve_sym(symname);
+#else
+                unsigned long sym_addr = 0;
+#endif
                 printk("relocating sym: %s\n", symname);
-                unsigned long *to_patch = \
+                to_patch = \
                     (unsigned long *)(elf + rela[i].r_offset);
                 *to_patch = sym_addr + rela[i].r_addend;
+                break;
+            case R_X86_64_RELATIVE:
+                printk("relative relocation: %i\n", rela[i].r_addend);
+                to_patch = \
+                    (unsigned long *)(elf + rela[i].r_offset);
+                *to_patch = elf + rela[i].r_addend;
                 break;
             default:
                 printk("unknown relocation?\n");

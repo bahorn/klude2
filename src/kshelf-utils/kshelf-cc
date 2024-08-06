@@ -90,5 +90,6 @@ CFLAGS_BUILD="-O2 \
 	   -fsanitize=bounds \
 	   -fsanitize=shift \
 	   -fsanitize=bool \
-	   -fsanitize=enum"
+	   -fsanitize=enum
+"
 gcc $CFLAGS_BUILD $@
