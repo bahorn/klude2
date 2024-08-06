@@ -1,0 +1,3 @@
+#!/bin/bash
+LDFLAGS="-T /build/src/kshelf-utils/kshelf.ld"
+ld $LDFLAGS $@
