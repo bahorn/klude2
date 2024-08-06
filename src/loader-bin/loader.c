@@ -25,9 +25,7 @@ void set_printk(char c)
     int printk_fd = openat(
         AT_FDCWD, "/proc/sys/kernel/printk", O_WRONLY|O_CREAT|O_TRUNC, 0666
     );
-    char printk_level[2];
-    printk_level[0] = c;
-    printk_level[1] = '\n';
+    char printk_level[] = {c, '\n'};
     write(printk_fd, printk_level, 2);
     close(printk_fd);
 }
