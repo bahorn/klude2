@@ -6,9 +6,12 @@
 #include <sys/syscall.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/klog.h>
 
 #include "../../artifacts/kshelf_loader.h"
 #define MOD_NAME "kshelf_loader"
+
+#define SYSLOG_ACTION_CLEAR 5
 
 int init_module(void *module_image, unsigned long len, const char *param_values)
 {
@@ -58,4 +61,8 @@ int main()
 
     /* Restore the console printk */
     set_printk(printk_level);
+
+    /* Clear syslog. This doesn't actually remove the messages, but here for the
+     * POC */
+    klogctl(SYSLOG_ACTION_CLEAR, NULL, 0);
 }

