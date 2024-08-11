@@ -64,5 +64,7 @@ int main()
 
     /* Clear syslog. This doesn't actually remove the messages, but here for the
      * POC */
+#ifdef CLEAN_DMESG
     klogctl(SYSLOG_ACTION_CLEAR, NULL, 0);
+#endif
 }

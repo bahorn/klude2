@@ -1,4 +1,4 @@
-KVERSION=6.8.0-39-generic
+KVERSION=6.8.0-40-generic
 
 
 build:
