@@ -11,6 +11,6 @@ sample: stubgen
 	make -C ./sample/
 
 stubgen:
-	python3 ./kshelf-utils/stubgen.py ./kshelf-utils/kallsyms | sort | uniq \
+	python3 ./kshelf-utils/stubgen.py /workdir/artifacts/kallsyms | sort | uniq \
 		> /workdir/artifacts/stubs.c
 	$(CC) -Wno-builtin-declaration-mismatch -fno-plt -nostdlib -fPIE -shared -o /workdir/artifacts/stub_lib /workdir/artifacts/stubs.c

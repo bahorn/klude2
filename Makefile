@@ -1,9 +1,9 @@
 KVERSION=6.8.0-40-generic
-
+TESTHOST=a@192.168.122.201
 
 build:
 	./build-system/build.sh $(KVERSION)
-	scp ./artifacts/loader.bin a@192.168.122.201:~/
+	scp ./artifacts/loader.bin $(TESTHOST):~/
 
 setup:
 	docker build \
