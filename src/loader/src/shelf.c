@@ -29,6 +29,7 @@ typedef int *(*set_memory_ro_t)(unsigned long addr, int numpages);
 
 size_t get_n_pages(size_t n);
 bool do_relocs(void *elf);
+size_t get_virtualsize(void *elf);
 
 
 #ifdef __KERNEL__
@@ -126,10 +127,10 @@ dt_end:
                 *to_patch = sym_addr + rela[i].r_addend;
                 break;
             case R_X86_64_RELATIVE:
-                printk("relative relocation: %i\n", rela[i].r_addend);
+                printk("relative relocation: %lli\n", rela[i].r_addend);
                 to_patch = \
                     (unsigned long *)(elf + rela[i].r_offset);
-                *to_patch = elf + rela[i].r_addend;
+                *to_patch = (unsigned long)elf + rela[i].r_addend;
                 break;
             default:
                 printk("unknown relocation?\n");
@@ -210,7 +211,7 @@ void run_elf(void *elf, size_t len)
 
     /* Transfer control */
     typedef void (*start_t)(void);
-    printk("Entrypoint: %p\n", body + ehdr->e_entry);
+    printk("Entrypoint: %llx\n", (unsigned long) body + ehdr->e_entry);
     start_t start = (start_t)(body + ehdr->e_entry);
 
 #ifdef __KERNEL__
