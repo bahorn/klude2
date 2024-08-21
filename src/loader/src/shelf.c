@@ -140,11 +140,31 @@ dt_end:
     return true;
 }
 
+
+/* Compute the size we actually need */
+size_t get_virtualsize(void *elf)
+{
+    size_t res = 0;
+    Elf64_Ehdr *ehdr = (Elf64_Ehdr *) elf;
+    for (uint16_t curr_ph = 0; curr_ph < ehdr->e_phnum; curr_ph++) {
+        Elf64_Phdr *phdr = elf + ehdr->e_phoff  + curr_ph * ehdr->e_phentsize;
+        if (phdr->p_type != PT_LOAD) continue;
+        res += get_n_pages(phdr->p_memsz) * PAGE_SIZE;
+    }
+    return res;
+}
+
 /* process */
 void run_elf(void *elf, size_t len)
 {
-    size_t size = get_n_pages(len) * PAGE_SIZE;
+    size_t size = get_virtualsize(elf);
     void *body = vmalloc(size);
+
+    if (body == NULL) {
+        printk("Unable to vmalloc memory?\n");
+        return;
+    }
+
     /* First copy the ELF to a new location */
     memset(body, 0, size);
     memcpy(body, elf, len);

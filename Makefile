@@ -1,5 +1,9 @@
+#KVERSION=5.15.0-91-generic
+#TESTHOST=a@192.168.122.207
+
 KVERSION=6.8.0-40-generic
 TESTHOST=a@192.168.122.201
+
 
 build:
 	./build-system/build.sh $(KVERSION)

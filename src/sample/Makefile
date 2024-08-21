@@ -6,7 +6,7 @@ OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 build: all.o
 	../kshelf-utils/kshelf-ld -o /workdir/artifacts/main.bin ./all.o /workdir/artifacts/stub_lib
 	strip /workdir/artifacts/main.bin
-	xxd -n payload -i /workdir/artifacts/main.bin > /workdir/artifacts/payload.h
+	../kshelf-utils/xxd.py /workdir/artifacts/main.bin payload > /workdir/artifacts/payload.h
 
 all.o: $(OBJ_FILES)
 	$(LD) -r -o all.o $(OBJ_FILES)

@@ -4,7 +4,7 @@ loader: lkm-loader-build
 lkm-loader-build: sample
 	make -C ./loader/ build
 	cp ./loader/src/kshelf-loader.ko /workdir/artifacts
-	xxd -n kshelf_loader -i ./loader/src/kshelf-loader.ko \
+	./kshelf-utils/xxd.py ./loader/src/kshelf-loader.ko kshelf_loader \
 		> /workdir/artifacts/kshelf_loader.h
 
 sample: stubgen

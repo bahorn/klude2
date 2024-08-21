@@ -54,6 +54,9 @@ SECTIONS
   PROVIDE (etext = .);
   .rodata         : { *(.rodata .rodata.* .gnu.linkonce.r.*) } :text
   .rodata1        : { *(.rodata1) } :text
+
+  . = ALIGN(0x1000);
+
   /* Adjust the address for the data segment.  We want to adjust up to
      the same address within the page on the next page up.  */
   . = DATA_SEGMENT_ALIGN (CONSTANT (MAXPAGESIZE), CONSTANT (COMMONPAGESIZE));
@@ -141,6 +144,8 @@ SECTIONS
   . = ALIGN(64 / 8);
   _end = .; PROVIDE (end = .);
   . = DATA_SEGMENT_END (.);
+
   .dynamic : { *(.dynamic) } :dynamic
+
   /DISCARD/ : { *(.note.*) *(.gnu_debuglink) *(.gnu.lto_*)  *(.comment) *(.interp) }
 }
