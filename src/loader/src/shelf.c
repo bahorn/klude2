@@ -111,15 +111,17 @@ dt_end:
     /* Now we iterate through the RELA */
     for (int i = 0; i < relasz; i++) {
         unsigned long *to_patch;
+        int sym_idx = 0;
+        char *symname = NULL;
+        unsigned long sym_addr = 0;
+
         switch (ELF64_R_TYPE(rela[i].r_info)) {
             case R_X86_64_GLOB_DAT:
                 /* symtab idx */
-                int sym_idx = ELF64_R_SYM(rela[i].r_info);
-                char *symname = strtab + symtab[sym_idx].st_name;
+                sym_idx = ELF64_R_SYM(rela[i].r_info);
+                symname = strtab + symtab[sym_idx].st_name;
 #ifdef __KERNEL__
-                unsigned long sym_addr = resolve_sym(symname);
-#else
-                unsigned long sym_addr = 0;
+                sym_addr = resolve_sym(symname);
 #endif
                 printk("relocating sym: %s\n", symname);
                 to_patch = \
@@ -131,6 +133,25 @@ dt_end:
                 to_patch = \
                     (unsigned long *)(elf + rela[i].r_offset);
                 *to_patch = (unsigned long)elf + rela[i].r_addend;
+                break;
+            case R_X86_64_COPY:
+                /* symtab idx */
+                sym_idx = ELF64_R_SYM(rela[i].r_info);
+                symname = strtab + symtab[sym_idx].st_name;
+#ifdef __KERNEL__
+                sym_addr = resolve_sym(symname);
+#endif
+                printk(
+                    "copy sym: %s (%lli bytes)\n",
+                    symname, symtab[sym_idx].st_size
+                );
+                to_patch = \
+                    (unsigned long *)(elf + rela[i].r_offset);
+                memcpy(
+                    to_patch,
+                    sym_addr + rela[i].r_addend,
+                    symtab[sym_idx].st_size
+                );
                 break;
             default:
                 printk("unknown relocation?\n");

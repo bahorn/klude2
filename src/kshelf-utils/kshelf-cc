@@ -2,7 +2,7 @@
 KBASE=/usr/src/linux-headers-$KVERSION
 # Mostly ripped from building a normal module
 # Potentially more flags need to be added here, but ignoring for now.
-CFLAGS_BUILD="-O2 \
+CFLAGS_BUILD="-O0 \
 	   -nostdinc \
 	   -isystem /usr/lib/gcc/x86_64-linux-gnu/11/include \
 	   -I$KBASE/include \
