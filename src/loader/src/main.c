@@ -12,6 +12,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("bah");
 MODULE_DESCRIPTION("kSHELF loader");
 MODULE_VERSION("1.0");
+MODULE_INFO(intree, "true");
 
 /* Module parameters */
 static unsigned long int taint_value = 0;
