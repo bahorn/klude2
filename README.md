@@ -2,8 +2,9 @@
 
 This is an updated and simplified version of my project `klude`.
 
-This only targets Ubuntu 24.04, but is trival to port to older versions of
-Ubuntu and other distros with some minor work.
+This repo only supports Ubuntu 22.04 and 24.04, but I have tested the resulting
+kSHELFs on various kernel versions built with easylkb[1] via another loader
+project.
 
 ## Usage
 
@@ -36,3 +37,7 @@ And finally, build the project and copy the loader over:
 ```
 make build
 ```
+
+## References
+
+* [1] https://github.com/deepseagirl/easylkb
