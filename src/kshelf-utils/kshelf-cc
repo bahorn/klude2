@@ -12,7 +12,6 @@ CFLAGS_BUILD="-O2 \
 	   -I$KBASE/arch/x86/include/uapi \
 	   -I$KBASE/include/uapi \
 	   -I$KBASE/include/generated/uapi \
-	   -I$KBASE/ubuntu/include \
 	   -include $KBASE/include/linux/compiler-version.h \
 	   -include $KBASE/include/linux/kconfig.h \
 	   -fPIE \
