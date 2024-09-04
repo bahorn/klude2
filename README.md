@@ -17,7 +17,7 @@ cp /proc/kallsyms ./artifacts/
 It doesn't need to be up to date, just needs to have the symbols you want to
 link against in it.
 
-Then you need to edit 3 lines in the `Makefile`:
+Set the following environment variables:
 ```
 DISTRO=disto_to_build_against
 KVERSION=the_target_kernel

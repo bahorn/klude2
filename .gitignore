@@ -2,3 +2,4 @@ artifacts
 *.o
 tests
 a.out
+priv
