@@ -149,7 +149,7 @@ dt_end:
                     (unsigned long *)(elf + rela[i].r_offset);
                 memcpy(
                     to_patch,
-                    sym_addr + rela[i].r_addend,
+                    (void *) sym_addr + rela[i].r_addend,
                     symtab[sym_idx].st_size
                 );
                 break;
