@@ -1,5 +1,5 @@
 #!/bin/bash
-KBASE=/usr/src/linux-headers-$KVERSION
+KBASE=$KPATH$KVERSION
 # Mostly ripped from building a normal module
 # Potentially more flags need to be added here, but ignoring for now.
 CFLAGS_BUILD="-O2 \

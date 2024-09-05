@@ -1,6 +1,7 @@
 FROM ubuntu:24.04
 
 ARG KVERSION=6.8.0-39-generic
+ENV KPATH=/usr/src/linux-headers-
 
 RUN apt update && \
     apt -y upgrade && \
