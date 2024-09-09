@@ -47,6 +47,10 @@ And finally, build the project and copy the loader over:
 make build
 ```
 
+## License
+
+GPL2
+
 ## References
 
 * [1] https://github.com/deepseagirl/easylkb
