@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 ARG KVERSION=5.15.0-119-generic
-ENV KPATH=/usr/src/
+ENV KPATH=/usr/src/linux-headers-
 
 RUN apt update && \
     apt -y upgrade && \
