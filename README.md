@@ -8,9 +8,12 @@ This repo supports / tested on the following distros for the loader:
 * Fedora 40
 
 I have tested the resulting kSHELFs on various kernel versions built with 
-easylkb[2] via another loader project.
+easylkb[2].
 Only thing to note in that case is be aware of kernel changes, i.e vmalloc
 becoming a macro in 6.10, etc.
+
+This is used in my project [skp](https://github.com/bahorn/skp) and as the
+payload for my [UEFI bootkit](https://blog.b.horn.uk/posts/grabit/).
 
 ## Usage
 
