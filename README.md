@@ -15,6 +15,8 @@ becoming a macro in 6.10, etc.
 This is used in my project [skp](https://github.com/bahorn/skp) and as the
 payload for my [UEFI bootkit](https://blog.b.horn.uk/posts/grabit/).
 
+Check out my article in [tmp.0ut #4](https://tmpout.sh/4/5.html) for an explainer on how this works.
+
 ## Usage
 
 First, we need to get a copy of the kallsyms from the target kernel:
