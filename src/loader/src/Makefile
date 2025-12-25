@@ -4,4 +4,4 @@ ccflags-y := -std=gnu99 \
 
 obj-m += $(TARGET).o
 
-kshelf-loader-m += ./util.o ./shelf.o ./main.o
+kshelf-loader-m += ./util.o ./filter_dmesg.o ./untaint.o ./shelf.o ./main.o

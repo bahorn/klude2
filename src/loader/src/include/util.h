@@ -2,5 +2,6 @@
 #define __UTIL__
 
 unsigned long resolve_sym(const char *sym_name);
+int is_unresolved_sym(void);
 
 #endif
