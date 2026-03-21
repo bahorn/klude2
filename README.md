@@ -30,27 +30,14 @@ link against in it.
 You can use a tool like `vmlinux-to-elf`[3] to extract kallsyms from the kernel
 bzImage you are targeting.
 
-Set the following environment variables:
+
+Then just do the following to copy it to /tmp on a target host:
 ```
-DISTRO=disto_to_build_against
-KVERSION=the_target_kernel
-TESTHOST=your_test_host
+just together ubuntu-2404 6.8.0-106-generic
+just copy ubuntu-24.04-testing.vm # your host
 ```
 
-The target kernel is just the output of `uname -r` and the test host is just the
-box to scp the output loader to for testing.
-If unset, a binary will just be written to `artifacts`.
-Distro is used to specify which Dockerfile to use in `./build-system/`.
-
-Build the build container:
-```
-make setup
-```
-
-And finally, build the project and copy the loader over:
-```
-make build
-```
+The ubuntu-2404 argument is the container to use in `/build-system`
 
 ## License
 
