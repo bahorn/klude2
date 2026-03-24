@@ -6,6 +6,7 @@ This repo supports / tested on the following distros for the loader:
 * Ubuntu 22.04
 * Ubuntu 24.04
 * Fedora 40
+* Upstream Custom Built kernels
 
 I have tested the resulting kSHELFs on various kernel versions built with 
 easylkb[2].
@@ -33,11 +34,21 @@ bzImage you are targeting.
 
 Then just do the following to copy it to /tmp on a target host:
 ```
-just together ubuntu-2404 6.8.0-106-generic
+just all-distro ubuntu-2404 6.8.0-106-generic
 just copy ubuntu-24.04-testing.vm # your host
 ```
 
-The ubuntu-2404 argument is the container to use in `/build-system`
+If you are doing development work, run `just setup DISTRO_CONTAINER KVERSION`
+instead, then build each time with `just build-distro DISTRO_CONTAINER KVERSION`
+to save recreating the container.
+
+The ubuntu-2404 argument is the container to use in `/build-system`, and there
+is also:
+* ubuntu-2204
+* fedora-40
+* and a custom one which requires the `all-path` and `build-path` just commands
+  instead to use. Please pass the full path, not relative to these commands, and
+  have a System.map in the directory of the kernel.
 
 ## License
 
