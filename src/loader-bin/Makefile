@@ -1,2 +1,2 @@
 build:
-	$(CC) ./loader.c -o /workdir/artifacts/loader.bin
+	$(CC) --static ./loader.c -o /workdir/artifacts/loader.bin
