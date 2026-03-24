@@ -50,6 +50,10 @@ is also:
   instead to use. Please pass the full path, not relative to these commands, and
   have a System.map in the directory of the kernel.
 
+The default payload is in `/sample`, but you can swap that out by passing a
+directory to a custom one by just appending the directory of your payload to the
+just build commands.
+
 ## License
 
 GPL2.
