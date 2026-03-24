@@ -7,7 +7,7 @@ build: all.o
 	../kshelf-utils/kshelf-ld -o /workdir/artifacts/main.bin ./all.o /workdir/artifacts/stub_lib
 	strip /workdir/artifacts/main.bin
 	../kshelf-utils/xxd.py /workdir/artifacts/main.bin payload > /workdir/artifacts/payload.c
-	cc -c /workdir/artifacts/payload.c -o /workdir/artifacts/payload.o
+	cc -nostdlib -fno-builtin -fno-asynchronous-unwind-tables -c /workdir/artifacts/payload.c -o /workdir/artifacts/payload.o
 
 all.o: $(OBJ_FILES)
 	$(LD) -r -o all.o $(OBJ_FILES)
