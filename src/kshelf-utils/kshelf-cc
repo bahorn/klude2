@@ -66,9 +66,6 @@ CFLAGS_BUILD="-O2 \
 	   -fno-omit-frame-pointer \
 	   -fno-optimize-sibling-calls \
 	   -fno-stack-clash-protection \
-	   -mrecord-mcount \
-	   -mfentry \
-	   -DCC_USING_FENTRY \
 	   -Wdeclaration-after-statement \
 	   -Wvla \
 	   -Wno-pointer-sign \
@@ -89,6 +86,7 @@ CFLAGS_BUILD="-O2 \
 	   -fsanitize=bounds \
 	   -fsanitize=shift \
 	   -fsanitize=bool \
-	   -fsanitize=enum
+	   -fsanitize=enum \
+       -DCC_USING_FENTRY
 "
 gcc $CFLAGS_BUILD $@
