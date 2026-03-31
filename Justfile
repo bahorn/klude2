@@ -1,4 +1,4 @@
-sample_dir := `pwd` + "/sample"
+sample_dir := `pwd` + "/samples/basic-ftrace"
 
 # setup a given distro build environment
 setup distro kversion:
