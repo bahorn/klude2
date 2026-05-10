@@ -58,7 +58,6 @@ CFLAGS_BUILD="-O2 \
 	   -Wno-address-of-packed-member \
 	   -fno-allow-store-data-races \
 	   -Wframe-larger-than=1024 \
-	   -fstack-protector-strong \
 	   -Wimplicit-fallthrough=5 \
 	   -Wno-main \
 	   -Wno-unused-but-set-variable \
@@ -83,10 +82,6 @@ CFLAGS_BUILD="-O2 \
 	   -Werror=incompatible-pointer-types \
 	   -Werror=designated-init \
 	   -Wno-packed-not-aligned \
-	   -fsanitize=bounds \
-	   -fsanitize=shift \
-	   -fsanitize=bool \
-	   -fsanitize=enum \
        -DCC_USING_FENTRY
 "
 gcc $CFLAGS_BUILD $@
