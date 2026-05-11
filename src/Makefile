@@ -9,6 +9,8 @@ lkm-loader-build: payload
 
 payload: stubgen
 	make -C ./payload/
+	# For external users, as the lkm-loader-build will modify this slightly.
+	cp /workdir/artifacts/payload.o /workdir/artifacts/pl.o
 
 stubgen:
 	python3 ./kshelf-utils/stubgen.py /workdir/artifacts/kallsyms | sort | uniq \

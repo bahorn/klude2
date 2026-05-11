@@ -41,5 +41,8 @@ all-path path payload=sample_dir:
     just setup custom custom
     just build-path {{ path }} {{ payload }}
 
+clean:
+    -rm -rf artifacts/
+
 copy remote_host:
     scp ./artifacts/loader.bin {{ remote_host }}:/tmp
