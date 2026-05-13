@@ -23,16 +23,14 @@ CFLAGS_BUILD="-O2 \
 	   -D__KERNEL__ \
 	   -Wall \
 	   -Wundef \
+	   -fms-extensions \
 	   -Werror=strict-prototypes \
 	   -Wno-trigraphs \
 	   -fno-strict-aliasing \
 	   -fno-common \
 	   -fshort-wchar \
-	   -Werror=implicit-function-declaration \
-	   -Werror=implicit-int \
-	   -Werror=return-type \
 	   -Wno-format-security \
-	   -std=gnu99 \
+	   -std=gnu11 \
 	   -mno-sse \
 	   -mno-mmx \
 	   -mno-sse2 \
@@ -65,7 +63,6 @@ CFLAGS_BUILD="-O2 \
 	   -fno-omit-frame-pointer \
 	   -fno-optimize-sibling-calls \
 	   -fno-stack-clash-protection \
-	   -Wdeclaration-after-statement \
 	   -Wvla \
 	   -Wno-pointer-sign \
 	   -Wno-stringop-truncation \
