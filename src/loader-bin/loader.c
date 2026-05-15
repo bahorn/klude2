@@ -1,5 +1,6 @@
 /* Standalone code to load the module */
 #include <stdio.h>
+#include <string.h>
 #include <linux/module.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -39,6 +40,7 @@ int main()
     char params[128];
     /* Read the taint value */
     char taint_buf[64];
+    memset(taint_buf, 0, 64);
     int taint_fd = open("/proc/sys/kernel/tainted", 0);
     if (read(taint_fd, taint_buf, sizeof(taint_buf)) < 0) {
         return -1;
@@ -54,7 +56,7 @@ int main()
     }
     /* Lower the console printk values*/
     set_printk('0');
-    
+
     /* Load + Unload the module */
     init_module(kshelf_loader, kshelf_loader_len, params);
     delete_module(MOD_NAME, 0);
